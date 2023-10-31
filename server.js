@@ -28,6 +28,13 @@ app.use('/public', express.static(process.cwd() + '/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+};
+
 
 
 myDB(async client => {
@@ -47,7 +54,7 @@ myDB(async client => {
     res.redirect('/profile');
   })
 
-  app.route('/profile').get((req,res) => {
+  app.route('/profile').get(ensureAuthenticated, (req,res) => {
     res.render('profile');
   })
 

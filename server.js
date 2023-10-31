@@ -1,5 +1,5 @@
 'use strict';
-require('dotenv').config({"path": '.env'}); // added obj key
+require('dotenv').config(); // added obj key {"path": '.env'}
 const express = require('express');
 const myDB = require('./connection');
 const fccTesting = require('./freeCodeCamp/fcctesting.js');

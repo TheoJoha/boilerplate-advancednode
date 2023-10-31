@@ -1,5 +1,5 @@
 'use strict';
-require('dotenv').config();
+require('dotenv').config({"path": '.env'}); // added obj key
 const express = require('express');
 const myDB = require('./connection');
 const fccTesting = require('./freeCodeCamp/fcctesting.js');
@@ -60,11 +60,6 @@ myDB(async client => {
   });
 });
 
-
-
-/* app.route('/').get((req, res) => {
-  res.render('index', { title: 'Hello', message: 'Please log in' });
-}); */
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

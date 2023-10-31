@@ -12,11 +12,8 @@ const app = express();
 
 
 app.set('view engine', 'pug'); // add pug as view engine
-app.set('views', './views/pug') // set views property of app 
-fccTesting(app); //For FCC testing purposes
-app.use('/public', express.static(process.cwd() + '/public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.set('views', './views/pug') // set views property of app
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -25,6 +22,12 @@ app.use(session({
 }));
 app.use(passport.initialize())
 app.use(passport.session())
+
+fccTesting(app); //For FCC testing purposes
+app.use('/public', express.static(process.cwd() + '/public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 
 myDB(async client => {

@@ -26,6 +26,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -35,24 +36,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/');
-};
-
-
 myDB(async client => {
   const myDataBase = await client.db('database').collection('users');
+
+  routes(app, myDataBase);
+  auth(app, myDataBase);
 
   io.on('connection', socket => {
     console.log('A user has connected');
   });
 
-  routes(app, myDataBase);
-  auth(app, myDataBase);
 }).catch(e => {
   app.route('/').get((req, res) => {
     res.render('index', { title: e, message: 'Unable to connect to database' });
@@ -63,3 +56,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+/* function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+}; */

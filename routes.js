@@ -1,5 +1,7 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+const GitHubStrategy = require('passport-github').Strategy;
 
 module.exports = function (app, myDataBase) {
   app.route('/').get((req, res) => {

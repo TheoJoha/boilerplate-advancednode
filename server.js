@@ -50,6 +50,12 @@ myDB(async client => {
     ++currentUsers;
     io.emit('user count', currentUsers);
 
+    socket.on('disconnect', () => {
+      /*anything you want to do on disconnect*/
+      --currentUsers;
+      io.emit('user count', currentUsers);
+    });
+
   });
 
 }).catch(e => {

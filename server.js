@@ -1,6 +1,8 @@
 'use strict';
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
+app.use(cors());
 const myDB = require('./connection');
 const fccTesting = require('./freeCodeCamp/fcctesting.js');
 const session = require('express-session')

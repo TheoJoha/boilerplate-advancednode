@@ -13,6 +13,9 @@ const auth = require('./auth.js')
 
 const app = express();
 
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
 
 app.set('view engine', 'pug'); // add pug as view engine
 app.set('views', './views/pug') // set views property of app

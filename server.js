@@ -2,7 +2,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-app.use(cors());
 const myDB = require('./connection');
 const fccTesting = require('./freeCodeCamp/fcctesting.js');
 const session = require('express-session')
@@ -18,6 +17,8 @@ const io = require('socket.io')(http);
 
 app.set('view engine', 'pug'); // add pug as view engine
 app.set('views', './views/pug') // set views property of app
+
+app.use(cors());
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
